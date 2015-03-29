@@ -1,0 +1,89 @@
+/*
+this is a basic wine choosing algorithm, it will take requirements from the user and output a specific wine that will
+be suited perfect for the requirements entered by the user and also being present in the wine stock of the program database.
+in this algorithm the database is considered a multidimensional  array. -A-K-
+*/
+
+
+input variables :: type(red,white) : taste(all_tastes_available_in_list) : priority(cheapest,oldest,expensive)
+
+output variables :: wine_name : taste : rate : year
+
+
+char wine_collection[1000][4], chosen[4];
+//wine_collection[stock_length][attributes_count],chosen[attributes_of_chosen_wine];
+
+int n=0; //n for database filling and searching.
+
+//filling the database
+0. star_program;
+
+1. enter wine_name, if wine_name is_equal_to "exit" then, ask for exit permission and end filling the wine_collection[][] by putting break; in the loop.
+   //for exiting the loop.
+2. else extract type,taste,rate,year from user and enter respectively; wine_name=wine_collection[n][0],type=wine_collection[n][1],
+   taste=wine_collection[n][2],rate=wine_collection[n][3],year=wine_collection[n][4] and perform n++;
+   //save the wine data in the database and increment the database counter, e,i, n by 1.
+3. repeat 1 & 2.
+
+//asking for user priorities.[priority_list: 'cheap','oldest','expensive']; choosing of the wine from the stock starts here.
+4. extract type,taste,priority from the user.
+
+5. n=0; //refreshing the value of n.
+   loop_layer, //loop for running the search from the database array.
+   if(
+      (wine_colletion[n][2] is_equal_to taste || taste==null_entry)//if taste of wine matches the user requirement or user has no taste
+      &&
+      (wine_collection[n][1] is_equal_to type)//and if type of wine matches the user requirement
+      )
+      {  chosen[0]=wine_collection[n][0]; //filling default wine_name;
+      chosen[1]=wine_collection[n][1]; //filling default type;
+      chosen[2]=wine_collection[n][2]; //filling default taste;
+      chosen[3]=wine_collection[n][3]; //filling default rate;
+      chosen[4]=wine_collection[n][4]; //filling default year;
+         switch( priority )// different expression for different priorities.
+         {
+            case 'cheap' : if( wine_collection[n][3] is_less_than chosen_list[i][3] ) // priority being cheap, we check for wine with lesser rate.
+            {
+              chosen[0]=wine_collection[n][0]; //filling wine_name;
+              chosen[1]=wine_collection[n][1]; //filling type;
+              chosen[2]=wine_collection[n][2]; //filling taste;
+              chosen[3]=wine_collection[n][3]; //filling rate;
+              chosen[4]=wine_collection[n][4]; //filling year;
+            }
+            break;
+
+            case 'expensive' : if( wine_collection[n][3] is_larger_than chosen_list[i][3] ) // priority being expensive, we check for wine with higher rate.
+            {
+              chosen[0]=wine_collection[n][0]; //filling wine_name;
+              chosen[1]=wine_collection[n][1]; //filling type;
+              chosen[2]=wine_collection[n][2]; //filling taste;
+              chosen[3]=wine_collection[n][3]; //filling rate;
+              chosen[4]=wine_collection[n][4]; //filling year;
+            }
+            break;
+
+            case 'oldest' : if( wine_collection[n][4] is_less_than chosen_list[i][4] ) // priority being oldest, we check for wine with lowest year registered.
+            {
+              chosen[0]=wine_collection[n][0]; //filling wine_name;
+              chosen[1]=wine_collection[n][1]; //filling type;
+              chosen[2]=wine_collection[n][2]; //filling taste;
+              chosen[3]=wine_collection[n][3]; //filling rate;
+              chosen[4]=wine_collection[n][4]; //filling year;
+            }
+            break;
+
+            default: ;//no statement assigned for the default scenario.
+            break;
+         }// switch syntax end.
+      }//condition syntax end.
+      n++; //increment n after every search in the wine_collection[][] array.
+
+6. repeat 5 loop_layer until all the wine_collection[][] entries are compared.
+
+7. if(chosen[0] is_equal_to null){display :: "no such wine is in the stock that fulfills your requirement, we are deeply sorry for the inconvenience.";}
+   //exception handling of the situation where no wine got chosen from the database , e,i, wine_collection[][].
+
+8. else display :: "name : " & chosen[0] & "\n taste : " & chosen[2] & "\n rate : " & chosen[3] & "\n year :" & chosen[4];
+   //displaying the details of the the chosen wine back to the user according to there requirements.
+
+9. end_program;
